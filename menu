@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Menu</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .menu { display: flex; justify-content: center; gap: 20px; }
+        .meal { cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Ramadan Menu</h1>
+    <label for="language">Choose Language:</label>
+    <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+        <option value="uz">O'zbek</option>
+    </select>
+    
+    <h2 id="sahoor-title">Sahoor</h2>
+    <div class="menu" id="sahoor-menu">
+        <div class="meal" onclick="showRecipe('oatmeal')">🥣 Oatmeal</div>
+        <div class="meal" onclick="showRecipe('buckwheat')">🍚 Buckwheat</div>
+    </div>
+    
+    <h2 id="iftar-title">Iftar</h2>
+    <div class="menu" id="iftar-menu">
+        <div class="meal" onclick="showRecipe('rice-porridge')">🍲 Rice Porridge</div>
+        <div class="meal" onclick="showRecipe('pancakes')">🥞 Pancakes</div>
+    </div>
+    
+    <div id="recipe" class="hidden"></div>
+    
+    <script>
+        const recipes = {
+            oatmeal: { en: "Oatmeal with honey and nuts.", ru: "Овсянка с мёдом и орехами.", uz: "Asal va yong'oq bilan suli yormasi." },
+            buckwheat: { en: "Buckwheat with butter.", ru: "Гречка с маслом.", uz: "Grechka yog' bilan." },
+            "rice-porridge": { en: "Rice porridge with milk.", ru: "Рисовая каша с молоком.", uz: "Sutli guruch bo'tqasi." },
+            pancakes: { en: "Fluffy pancakes with jam.", ru: "Пышные блины с вареньем.", uz: "Murabbo bilan quyuq blinchiklar." }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById("language").value;
+            document.getElementById("sahoor-title").innerText = lang === "en" ? "Sahoor" : lang === "ru" ? "Сухур" : "Saharlik";
+            document.getElementById("iftar-title").innerText = lang === "en" ? "Iftar" : lang === "ru" ? "Ифтар" : "Iftor";
+        }
+
+        function showRecipe(meal) {
+            const lang = document.getElementById("language").value;
+            document.getElementById("recipe").innerText = recipes[meal][lang];
+            document.getElementById("recipe").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
